@@ -5,22 +5,23 @@ const ps = require('prompt-sync');
 const prompt = ps()
 
 
-class MyClass {
+class Connection {
     
     host = "" ;
     user = "" ;
     port = 0 ;
-    password = "" ;
+    passWord = "" ;
     database = "" ;
 
  
 
     constructor() {
-      if (MyClass.instance) {
-        return MyClass.instance
-      }
-      MyClass.instance = this;
-        console.log("done")
+        if (Connection.instance) {
+          console.log("Instence is already created : ")
+          return Connection.instance
+        }
+        Connection.instance = this;
+        console.log("Create instence is done succssfuly : ")
      }
 
     setHost(host){
@@ -35,8 +36,8 @@ class MyClass {
         this.port=port;
     }
 
-    setPassword(password){
-        this.password=password;
+    setPassword(passWord){
+        this.passWord=passWord;
     }
     
 
@@ -44,11 +45,11 @@ class MyClass {
         this.database=database;
     }
 
-    setConnection(host,user,port,password,database){
+    setConnection(host,user,port,passWord,database){
         this.setHost(host);
         this.setUser(user);
         this.setPort(port);
-        this.setPassword(password);
+        this.setPassword(passWord);
         this.setDataBase(database);
     }
 
@@ -65,34 +66,13 @@ class MyClass {
     }
 
     getPassword(){
-        return this.password;
+        return this.passWord;
     }
     
 
     getDataBase(){
         return this.database;
     }
-
-    createDB(host,user,port,password){
-        this.setConnection(host,user,port,password);
-        var pgtools = require("pgtools");
-        const config = {
-            user: this.getUser(),
-            host: this.getHost(),
-            password: this.getPassword(),
-            port: this.getPort()
-        };
-        let dbName="Dinaa";
-        pgtools.createdb(config, dbName, function(err, res) {
-        if (err) {
-            console.error(err);
-            process.exit(-1);
-        }
-        console.log(res);
-        });
-        return dbName;
-    }
-
 
     getClient(){
         const {Client}=require('pg');
@@ -110,9 +90,9 @@ class MyClass {
 
     }
    
-    getNewConnection(host,user,port,password,database){
+    getNewConnection(host,user,port,passWord,database){
          
-        this.setConnection(host,user,port,password,database);
+        this.setConnection(host,user,port,passWord,database);
         const cleint = this.getClient();
  
        return cleint;
@@ -126,24 +106,40 @@ class MyClass {
 
 
   //main :
-  var instanceOne = new MyClass()
-  let dbname = prompt("enter the name of DB : ");
 
-  let hostname = prompt("enter the name of host : ");
+  var instanceOne = new Connection()
+  let dBName = prompt("enter the name of DB : ");
+  let hostName = prompt("enter the name of host : ");
   let user = prompt("enter the name of user : ");
-  let pw = prompt("enter the password : ");
+  let passWord = prompt("enter the password : ");
   let port = prompt("enter the port : ");
 
-   
-
- let dbName2 = "ConnectionProfile";
- const clie=instanceOne.getNewConnection(hostname,user,port,pw,dbName2);
- clie.connect();
+ const client=instanceOne.getNewConnection(hostName,user,port,passWord,dBName);
+ client.connect();
  
+ // Test query :
+/*
+ client.query("Select * from table_name", (err, res) => {
+    if (err) {
+      console.log(err.stack)
+    } else {
+      console.log(res.rows)
+      
+    }
+  })
+*/ 
+
+
+
+
+
+//here profile code i will return it letter :
+/* 
+ let dbName2 = "ConnectionProfile";
+
 const text = 'INSERT INTO connection(C_Id, C_Host, C_User,C_PW,C_DBName,C_Port) VALUES($1, $2,$3,$4,$5,$6) RETURNING *'
 const values = [1,hostname,user,pw,dbname,port]
-// callback
-/*clie.query(text, values, (err, res) => {
+ clie.query(text, values, (err, res) => {
   if (err) {
     console.log(err.stack)
   } else {
@@ -151,11 +147,11 @@ const values = [1,hostname,user,pw,dbname,port]
     // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
   }
 })
-*/
+
 const clien=instanceOne.getNewConnection(hostname,user,port,pw,dbname);
  
 clien.connect();
-/*clie.query("Select * from connection", (err, res) => {
+clie.query("Select * from connection", (err, res) => {
     if (err) {
       console.log(err.stack)
     } else {
@@ -164,12 +160,4 @@ clien.connect();
     }
   })
 
-*/
-  console.log(clie==clien)
-
-/*
- console.log(count)
-  
- */ 
-
-//const f=instanceOne.createDB( hostname,user,port,pw);
+ */
