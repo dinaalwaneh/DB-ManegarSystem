@@ -1,5 +1,6 @@
 
 
+const { query } = require('express');
 const ps = require('prompt-sync');
 //get some user input
 const propt = ps()
@@ -11,27 +12,14 @@ var options = {
   }
 
 
-
-  let dBName = "school";//prompt("enter the name of DB : ");
-  let hostName = "localhost";//prompt("enter the name of host : ");
-  let user ="postgres";// prompt("enter the name of user : ");
-  let passWord ="dina14120021412002";// prompt("enter the password : ");
-  let port = 5432; //prompt("enter the port : ");
-
- const Connection = require('./Connection.js')
-
-  // Instantiate User:
-  let userr = new Connection()
-  
- const client=userr.getNewConnection(hostName,user,port,passWord,dBName);
- client.connect();
+ 
 
 class Query {
   
-   getQuery(Client){
+   getQuery(client){
 
       options.query=propt("enter your query plz : ")
-      Client.query(options.query, (err, res) => {
+      client.query(options.query, (err, res) => {
          if (err) {
          console.log(err.stack)
          } else {
@@ -72,7 +60,35 @@ class Query {
       })*/
 
    
-  
+      GetDBTabels(client){
+         return new Promise( ( resolve, reject ) => {
+             client.query("select table_name from information_schema.tables where table_schema='public'", (err, result)=>{
+                 if (err){
+                     return reject( err );
+                 }
+                 {
+                     resolve( result.rows);
+                      
+                 }
+                
+             });
+         })
+       }
+
+       GetDBColumns(result,client){
+    
+         return new Promise( ( resolve, reject ) => {
+            client.query("SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = " + "'"+result.table_name+"'", (err, res)=> {
+             if (err) {
+             console.log(err.stack)
+             } else {
+       
+               resolve(res.rows)
+               
+             }
+           })
+         })
+       }
    
 }
 
@@ -98,13 +114,68 @@ class DeleteData extends Query {
    //DELETE FROM table_name WHERE condition;
       
 }
-const g=new GetTable();
-g.getQuery(client);
+ 
+class CreateTable extends Query{
+
+   CreateTable(shcema,client){
+
+      var tableName = propt("enter the name of table to be created : ");
+      client.query("CREATE TABLE "+ tableName+shcema, function(err, res) {
+          if (err) {
+          console.log(err.stack)
+          } else {
+          
+            console.log(res.rows) ;
+            
+          }
+      });
+      return tableName;
+   }
+    
+} 
+
+
+class Insert extends Query{
+
+   InertFilesData(values,tableName,client){
+
+      var table=tableName , values_=values;
+
+      client.query("INSERT INTO "+table+" VALUES "+values_, function(err, res) {
+         if (err) {
+         console.log(err.stack)
+         } else {
+         
+         console.log(res.rows) ;
+         
+         }
+     });
+   }
+
+   CreateTable(shcema,client){
+
+      var tableName = propt("enter the name of table to be created : ");
+      client.query("CREATE TABLE "+ tableName+shcema, function(err, res) {
+          if (err) {
+          console.log(err.stack)
+          } else {
+          
+            console.log(res.rows) ;
+            
+          }
+      });
+      return tableName;
+   }
+
+}
 
 module.exports = {
    Query : Query,
    Read : Read,
    Write:Write,
    GetTable:GetTable,
-   DeleteTable:DeleteTable
+   DeleteTable:DeleteTable,
+   CreateTable:CreateTable,
+   Insert:Insert
  }
+

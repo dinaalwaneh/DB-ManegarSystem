@@ -8,4 +8,3 @@ console.log( "\n "+JohnInstance.getQuery())
 //switch here for quere :
 
 
-
