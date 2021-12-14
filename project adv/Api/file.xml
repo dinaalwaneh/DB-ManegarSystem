@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<database>  
+<school>  
+  <Id>3211</Id>  
+  <Name>Siwar</Name>  
+</school>  
+<school>  
+   <Id>6758</Id>  
+  <Name>farah</Name> 
+</school>  
+<school>  
+    <Id>8786</Id>  
+  <Name>noor</Name> 
+</school>  
+</database>  
