@@ -92,8 +92,27 @@ if(fileType=='Csv'){
     row_=[];       
     }
 
-//YARA HERE
 
+
+fi.SchemaIsfounded(client,jsonHeader).then(tableName_ => {
+
+    if(tableName_!=null){
+
+        jsonFile.ExportData(rows_,tableName_.table_name,client);
+        
+    }else{
+
+        schema = jsonFile.CreateSchema(jsonHeader);
+        tableName_ =insert.CreateTable(schema,client);
+        jsonFile.ExportData(rows_,tableName_,client);
+
+        
+    }
+
+
+}).catch(err => {
+console.log(err);
+})
 
 }
 
