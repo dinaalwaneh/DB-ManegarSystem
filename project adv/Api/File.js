@@ -20,14 +20,21 @@ class File{
           else{
             values+="'"+data[count][j]+"')"
           }
-      
+          
         }
         return values;
     }
 
-    ExportData(isfound,tableName,data){
-        console.log(0)
-         
+    ExportData(data,tableName,client){
+
+        for (var i = 0; i < data.length; i++) {
+            var values=this.GetValues(data,i)
+            var table = tableName ;
+            const insert = new query.Insert();
+            insert.InertFilesData(values,table,client)
+        }
+        
+
     }
 
     async SchemaIsfounded(client,data){
@@ -42,8 +49,11 @@ class File{
             for(var j=0;j<columnObject.length;j++){
                 columnArray.push(columnObject[j].column_name)   
             }
-            if(JSON.stringify(columnArray) === JSON.stringify(data[0]))  {
+
+           
+            if(JSON.stringify(columnArray) === JSON.stringify(data))  {
                 result=dataBaseTables[i];
+                console.log("yeees")
                 return(result) ;
                
               }
@@ -51,7 +61,20 @@ class File{
         }
     }
 
-     
+    CreateSchema(jsonHeader){
+        var schema="(";
+        for(var i=0;i<jsonHeader.length;i++){
+            if(i<jsonHeader.length-1){
+                schema+=jsonHeader[i]+" varchar(255),"
+                
+        }
+        else{
+                schema+=jsonHeader[i]+" varchar(255))"
+        }
+        } 
+        return schema;
+
+    }  
 
 }
 
@@ -71,17 +94,7 @@ class Csv extends File{
         return data;
     }
 
-    ExportData(data,tableName,client){
-
-        for (var i = 1; i < data.length-1; i++) {
-            var values=this.GetValues(data,i)
-            var table = tableName ;
-            const insert = new query.Insert();
-            insert.InertFilesData(values,table,client)
-        }
-        
-
-    }
+   
  
 }
 

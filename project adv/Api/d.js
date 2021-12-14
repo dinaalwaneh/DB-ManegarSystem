@@ -146,7 +146,7 @@ class Insert extends Query{
          console.log(err.stack)
          } else {
          
-         console.log(res.rows) ;
+         console.log("Inserted had done succsesfully : ") ;
          
          }
      });
@@ -155,12 +155,13 @@ class Insert extends Query{
    CreateTable(shcema,client){
 
       var tableName = propt("enter the name of table to be created : ");
+   
       client.query("CREATE TABLE "+ tableName+shcema, function(err, res) {
           if (err) {
           console.log(err.stack)
           } else {
           
-            console.log(res.rows) ;
+            console.log("Table + "+tableName+" has added :") ;
             
           }
       });

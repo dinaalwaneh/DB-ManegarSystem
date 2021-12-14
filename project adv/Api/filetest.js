@@ -46,57 +46,53 @@ console.log(dataBaseTables)
 */
 const query=require('./d.js');
 let fileType = prompt("enter the type of file you want to import : ");
+const insert = new query.Insert();
+
 if(fileType=='Csv'){
 
-    const fi=new File.Csv()
+    const csvfile=new File.Csv()
     let data =fi.ReadFile("C:\\Users\\hp\\Desktop\\all\\data.csv")
-    
-    fi.SchemaIsfounded(client,data).then(tableName => {
+    fi.SchemaIsfounded(client,data[0]).then(tableName => {
         if(tableName!=null){
-            
-            fi.ExportData(data,tableName.table_name,client);
+            data.shift() 
+            console.log(data)
+            data.pop() 
+            csvfile.ExportData(data,tableName.table_name,client);
         }else{
-            const insert = new query.Insert();
-            schema="(";
-            for(var i=0;i<data[0].length;i++){
-                if(i<data[0].length-1){
-                    schema+=data[0][i]+" varchar(255),"
-                    
-            }
-            else{
-                    schema+=data[0][i]+" varchar(255))"
-            }
-            
-            }
+
+            schema = csvfile.CreateSchema(jsonHeader);
             tableName =insert.CreateTable(schema,client);
-            fi.ExportData(data,tableName,client);
+            data.shift() 
+            data.pop() 
+            csvfile.ExportData(data,tableName,client);
         }
     
     }).catch(err => {
-    console.log(err);
+        console.log(err);
     })
 
 }else if(fileType = "Json"){
-    const fi=new File.Json()
-    let data =fi.ReadFile("User.json")
-    console.log(data)
+    const jsonFile=new File.Json()
+    let data =jsonFile.ReadFile("User.json")
+     
 
     jsonHeader=[]
-    for (let key in data) {
+    for (let key in data[0]) {
         jsonHeader.push(key);
     }
 
-fi.SchemaIsfounded(client,jsonHeader).then(tableName => {
-        if(tableName!=null){
-            
-            console.log(tableName)
-        }else{
-        console.log(0)
-        }
-    
-    }).catch(err => {
-    console.log(err);
-    })
+    row_=[]
+    rows_=[]
+    for(i=0;i<data.length;i++){
+    for(j=0;j<jsonHeader.length;j++){
+        row_.push(data[i][jsonHeader[j]]);
+    }
+
+    rows_.push(row_)
+    row_=[];       
+    }
+
+//YARA HERE
 
 
 }
