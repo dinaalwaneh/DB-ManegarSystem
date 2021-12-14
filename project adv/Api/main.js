@@ -1,31 +1,39 @@
 
+  const Connection = require('./Connection.js')
+  //no
+  const { json } = require('express/lib/response');
+
+  //no//
+  const ps = require('prompt-sync');
+  const { isConstructorDeclaration } = require('typescript');
+  //get some user input
+  const prompt = ps()
+
+  let connectionDetails_ =  Connection.connectionDetails;
+
+  connectionDetails_.database = "school";//prompt("enter the name of DB : ");
+  connectionDetails_.hostName = "localhost";//prompt("enter the name of host : ");
+  connectionDetails_.user ="postgres";// prompt("enter the name of user : ");
+  connectionDetails_.passWord ="dina14120021412002";// prompt("enter the password : ");
+  connectionDetails_.port = 5432; //prompt("enter the port : ");
  
-const { json } = require('express/lib/response');
-const ps = require('prompt-sync');
-const { isConstructorDeclaration } = require('typescript');
-//get some user input
-const prompt = ps()
-
-
-  let dBName = "school";//prompt("enter the name of DB : ");
-  let hostName = "localhost";//prompt("enter the name of host : ");
-  let user ="postgres";// prompt("enter the name of user : ");
-  let passWord ="dina14120021412002";// prompt("enter the password : ");
-  let port = 5432; //prompt("enter the port : ");
-
- const Connection = require('./Connection.js')
-
   // Instantiate User:
-  let userr = new Connection()
+  let connection_ = new Connection.Connection()
   
- const client=userr.getNewConnection(hostName,user,port,passWord,dBName);
+ const client=connection_.GetNewConnection(connectionDetails_);
  client.connect();
 
+ console.log("***********List of Jobs :)***********")
+ console.log("***********1. make a query :)***********")
+ console.log("***********2. import file to database :)***********")
+ console.log("***********3. export data from database :)***********")
 
+
+ 
  //
  
  
- 
+ /*
  
  const db=require('./d');
  var readQuery = new db.Read();
@@ -46,7 +54,7 @@ console.log(sqll) //del=prompt("enter the name of DB : ");
     
   }
 })*/
- 
+ /*
 array=[]
 
 var tableArray = [];
@@ -326,4 +334,4 @@ clie.query("Select * from connection", (err, res) => {
     }
   })
 
- */
+ */  

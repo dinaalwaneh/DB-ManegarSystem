@@ -5,15 +5,15 @@ const Pool = require("pg").Pool;
  const pool = new Pool({
    host: "localhost",
    user: "postgres",
-   password: "rahaf2002",
+   password: "dina14120021412002",
    database: "school",
-   port: 3000
+   port: 5432
  });
  // open  PostgreSQL connection
  pool.connect((err, client, done) => {
    if (err) throw err;
  
-   client.query("SELECT * FROM TableName", (err, result) => {
+   client.query("SELECT * FROM table_name", (err, result) => {
      done();
      if (err) {
        console.log(err.stack);
@@ -24,8 +24,10 @@ const Pool = require("pg").Pool;
        const csvWriter = createCsvWriter({
          path: "csvWriter.csv",
          header: [
-           { id: "id", title: "id" },
-           { id: "name", title: "name" }
+           { id: "id", title: "id"}  ,
+           { id: "name", title: "name" },
+           { id: "city", title: "city" }
+         
          ]
        });
        csvWriter
