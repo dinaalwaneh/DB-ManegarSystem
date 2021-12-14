@@ -34,7 +34,7 @@ const Connection = require('./Connection.js')
  // Instantiate User:
  let userr = new Connection()
  
-const client=userr.getNewConnection(hostName,user,port,passWord,dBName);
+const client=userr.GetNewConnection(hostName,user,port,passWord,dBName);
 client.connect();
 
 /*
@@ -44,7 +44,7 @@ let get=new query.Read();
 let dataBaseTables = get.getQuery(client);
 console.log(dataBaseTables)
 */
-const query=require('./d.js');
+const query=require('./Query.js');
 let fileType = prompt("enter the type of file you want to import : ");
 const insert = new query.Insert();
 
@@ -52,19 +52,18 @@ if(fileType=='Csv'){
 
     const csvfile=new File.Csv()
     let data =fi.ReadFile("C:\\Users\\hp\\Desktop\\all\\data.csv")
-    fi.SchemaIsfounded(client,data[0]).then(tableName => {
+    csvfile.SchemaIsfounded(client,data[0]).then(tableName => {
         if(tableName!=null){
             data.shift() 
-            console.log(data)
             data.pop() 
-            csvfile.ExportData(data,tableName.table_name,client);
+            csvfile.ImportData(data,tableName.table_name,client);
         }else{
 
             schema = csvfile.CreateSchema(jsonHeader);
             tableName =insert.CreateTable(schema,client);
             data.shift() 
             data.pop() 
-            csvfile.ExportData(data,tableName,client);
+            csvfile.ImportData(data,tableName,client);
         }
     
     }).catch(err => {
@@ -94,25 +93,25 @@ if(fileType=='Csv'){
 
 
 
-fi.SchemaIsfounded(client,jsonHeader).then(tableName_ => {
+    jsonFile.SchemaIsfounded(client,jsonHeader).then(tableName_ => {
 
-    if(tableName_!=null){
+        if(tableName_!=null){
 
-        jsonFile.ExportData(rows_,tableName_.table_name,client);
-        
-    }else{
+            jsonFile.ImportData(rows_,tableName_.table_name,client);
+            
+        }else{
 
-        schema = jsonFile.CreateSchema(jsonHeader);
-        tableName_ =insert.CreateTable(schema,client);
-        jsonFile.ExportData(rows_,tableName_,client);
+            schema = jsonFile.CreateSchema(jsonHeader);
+            tableName_ =insert.CreateTable(schema,client);
+            jsonFile.ImportData(rows_,tableName_,client);
 
-        
-    }
+            
+        }
 
 
-}).catch(err => {
-console.log(err);
-})
+    }).catch(err => {
+    console.log(err);
+    })
 
 }
 

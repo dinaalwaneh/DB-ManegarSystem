@@ -1,14 +1,15 @@
-let count = 0;
 
-class Connection {
+
+var connectionDetails= {
+    host : "" ,
+    user : "" ,
+    port : 0 ,
+    passWord : "" ,
+    database : "" 
+}
     
-    host = "" ;
-    user = "" ;
-    port = 0 ;
-    passWord = "" ;
-    database = "" ;
-
- 
+  
+class Connection {
 
     constructor() {
         if (Connection.instance) {
@@ -19,65 +20,65 @@ class Connection {
         console.log("Create instence is done succssfuly : ")
      }
 
-    setHost(host){
-        this.host=host;
+    SetHost(host){
+        connectionDetails.host=host;
     }
     
-    setUser(user){
-        this.user=user;
+    SetUser(user){
+        connectionDetails.user=user;
     }
 
-    setPort(port){
-        this.port=port;
+    SetPort(port){
+        connectionDetails.port=port;
     }
 
-    setPassword(passWord){
-        this.passWord=passWord;
-    }
-    
-
-    setDataBase(database){
-        this.database=database;
-    }
-
-    setConnection(host,user,port,passWord,database){
-        this.setHost(host);
-        this.setUser(user);
-        this.setPort(port);
-        this.setPassword(passWord);
-        this.setDataBase(database);
-    }
-
-    getHost(){
-        return this.host;
-    }
-    
-    getUser(){
-        return this.user;
-    }
-
-    getPort(){
-        return this.port;
-    }
-
-    getPassword(){
-        return this.passWord;
+    SetPassword(passWord){
+        connectionDetails.passWord=passWord;
     }
     
 
-    getDataBase(){
-        return this.database;
+    SetDataBase(database){
+        connectionDetails.database=database;
     }
 
-    getClient(){
+    SetConnection(connectionDetails_){
+        this.SetHost(connectionDetails_.host);
+        this.SetUser(connectionDetails_.user);
+        this.SetPort(connectionDetails_.port);
+        this.SetPassword(connectionDetails_.passWord);
+        this.SetDataBase(connectionDetails_.database);
+    }
+
+    GetHost(){
+        return connectionDetails.host;
+    }
+    
+    GetUser(){
+        return connectionDetails.user;
+    }
+
+    GetPort(){
+        return connectionDetails.port;
+    }
+
+    GetPassword(){
+        return connectionDetails.passWord;
+    }
+    
+
+    GetDataBase(){
+        return connectionDetails.database;
+    }
+
+    GetClient(){
         const {Client}=require('pg');
         const cleint = new Client({
 
-            host: this.getHost(),
-            user: this.getUser(),
-            port: this.getPort(),
-            password: this.getPassword() ,
-            database: this.getDataBase()
+            host: this.GetHost(),
+            user: this.GetUser(),
+            port: this.GetPort(),
+            password: this.GetPassword() ,
+            database: this.GetDataBase()
 
         });
         
@@ -85,10 +86,10 @@ class Connection {
 
     }
    
-    getNewConnection(host,user,port,passWord,database){
-         
-        this.setConnection(host,user,port,passWord,database);
-        const cleint = this.getClient();
+    GetNewConnection(connectionDetails_){
+          
+        this.SetConnection(connectionDetails_);
+        const cleint = this.GetClient();
  
        return cleint;
 
@@ -98,4 +99,30 @@ class Connection {
 
   }
  
-module.exports = Connection;
+
+/*
+  let o=new Connection()
+  let connectionDetails_ = connectionDetails
+  connectionDetails_.host="localhost";
+  connectionDetails_.passWord="dina14120021412002";
+  connectionDetails_.port=5432;
+  connectionDetails_.user="postgres";
+  connectionDetails_.database="school";
+
+
+  const h=o.GetNewConnection(connectionDetails_);
+  h.query("select * from table_name", (err, res) => {
+    if (err) {
+    console.log(err.stack)
+    } else {
+    console.log(res.rows)
+    
+    }
+  })
+h.connect()*/
+
+
+module.exports = {
+    connectionDetails : connectionDetails,
+    Connection:Connection
+  }

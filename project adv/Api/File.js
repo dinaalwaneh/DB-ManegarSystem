@@ -1,10 +1,14 @@
 
 const fileSystem = require("fs");
-const query=require('./d.js');
+const query=require('./Query.js');
 
 
 class File{
 
+
+    constructor(){
+        console.log("Instance has done sucssfully :")
+    }
     
     ReadFile(path){
         console.log("Reading file has done sucssfult : ");
@@ -25,7 +29,7 @@ class File{
         return values;
     }
 
-    ExportData(data,tableName,client){
+    ImportData(data,tableName,client){
 
         for (var i = 0; i < data.length; i++) {
             var values=this.GetValues(data,i)
@@ -80,6 +84,20 @@ class File{
 
 
 class Csv extends File{
+
+    static instance;
+	
+	constructor() {
+		super()
+	}
+	
+    GetInsatnce() {
+		if(instance == null) {
+			instance = new Csv();
+		}
+		return instance;
+	}
+
     //Override :
     ReadFile(path){
 
@@ -91,6 +109,7 @@ class Csv extends File{
         for (let i in data) { // SPLIT COLUMNS
              data[i] = data[i].split(",");
         }
+ 
         return data;
     }
 
