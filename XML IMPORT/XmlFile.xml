@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FORMULA1>
+    <USER year="2018">
+        <NAME>VETTEL</NAME>
+        <TEAM>FERRARI</TEAM>
+    </USER>
+   <USER year="2018">
+        <NAME>RAIKKONEN</NAME>
+        <TEAM>FERRARI</TEAM>
+    </USER>
+    <USER year="2018">
+        <NAME>HAMILTON</NAME>
+        <TEAM>MERCEDES</TEAM>
+    </USER>
+    <USER year="2018">
+        <NAME>BOTTAS</NAME>
+        <TEAM>MERCEDES</TEAM>
+    </USER>
+    <USER year="2018">
+        <NAME>RICCIARDO</NAME>
+        <TEAM>REDBULL</TEAM>
+    </USER>
+    <USER year="2018">
+        <NAME>VERSTAPPEN</NAME>
+        <TEAM>REDBULL</TEAM>
+    </USER>
+</FORMULA1>
