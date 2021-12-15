@@ -226,3 +226,24 @@ you must enter the type of file you want import to Database (CSV , JSON )
  the header is the firs row in the csv 
  
  and pop it delete last row 
+ 
+ 
+ 
+ # json 
+ 
+ ![image](https://user-images.githubusercontent.com/64756218/146265566-78b30c46-ebf8-408f-9739-c22f8f33bee0.png)
+ 
+ 
+ make object 
+ read file 
+ header for json 
+ szve json in rows 
+ convert them to list 
+ and add it to list 
+ 
+ 
+ we convert the format json to use the same function to get the header 
+ 
+ import schema if founded 
+ if not : create schema and create table to so send the schema , then import data 
+
