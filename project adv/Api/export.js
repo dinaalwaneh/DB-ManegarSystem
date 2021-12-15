@@ -13,7 +13,7 @@ const Pool = require("pg").Pool;
  pool.connect((err, client, done) => {
    if (err) throw err;
  
-   client.query("SELECT * FROM table_name", (err, result) => {
+   client.query("SELECT * FROM customers", (err, result) => {
      done();
      if (err) {
        console.log(err.stack);

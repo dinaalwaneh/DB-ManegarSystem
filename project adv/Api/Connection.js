@@ -1,22 +1,23 @@
 
-
+const query=require('./Query.js');
 var connectionDetails= {
     host : "" ,
     user : "" ,
     port : 0 ,
-    passWord : "" ,
-    database : "" 
+    passWord : "" 
+     
 }
     
   
 class Connection {
-
+    database=""
     constructor() {
         if (Connection.instance) {
           console.log("Instence is already created : ")
           return Connection.instance
         }
         Connection.instance = this;
+        
         console.log("Create instence is done succssfuly : ")
      }
 
@@ -38,15 +39,15 @@ class Connection {
     
 
     SetDataBase(database){
-        connectionDetails.database=database;
+        this.database=database;
     }
 
-    SetConnection(connectionDetails_){
+    SetConnection(connectionDetails_,databaseName){
         this.SetHost(connectionDetails_.host);
         this.SetUser(connectionDetails_.user);
         this.SetPort(connectionDetails_.port);
         this.SetPassword(connectionDetails_.passWord);
-        this.SetDataBase(connectionDetails_.database);
+        this.SetDataBase(databaseName);
     }
 
     GetHost(){
@@ -67,7 +68,7 @@ class Connection {
     
 
     GetDataBase(){
-        return connectionDetails.database;
+        return this.database;
     }
 
     GetClient(){
@@ -86,9 +87,9 @@ class Connection {
 
     }
    
-    GetNewConnection(connectionDetails_){
+    GetNewConnection(connectionDetails_,databaseName){
           
-        this.SetConnection(connectionDetails_);
+        this.SetConnection(connectionDetails_,databaseName);
         const cleint = this.GetClient();
  
        return cleint;
@@ -96,31 +97,26 @@ class Connection {
 
     }
 
-
+    ConnectionProfile(connectionDetails_,databaseName,client){
+          
+        let listOfDetails=[connectionDetails_.host,connectionDetails_.user,connectionDetails_.port,databaseName,connectionDetails_.passWord]
+        
+        var values="("
+        for(var j=0;j<listOfDetails.length;j++){
+           if(j<listOfDetails.length-1){
+            values+="'"+listOfDetails[j]+"',"
+               
+          }
+          else{
+            values+="'"+listOfDetails[j]+"')"
+          }
+          
+        }
+            const insert = new query.Insert();
+            insert.InertFilesData(values,"connections",client)   
+    }
   }
  
-
-/*
-  let o=new Connection()
-  let connectionDetails_ = connectionDetails
-  connectionDetails_.host="localhost";
-  connectionDetails_.passWord="dina14120021412002";
-  connectionDetails_.port=5432;
-  connectionDetails_.user="postgres";
-  connectionDetails_.database="school";
-
-
-  const h=o.GetNewConnection(connectionDetails_);
-  h.query("select * from table_name", (err, res) => {
-    if (err) {
-    console.log(err.stack)
-    } else {
-    console.log(res.rows)
-    
-    }
-  })
-h.connect()*/
-
 
 module.exports = {
     connectionDetails : connectionDetails,
