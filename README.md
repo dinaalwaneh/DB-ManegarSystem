@@ -124,10 +124,52 @@ the list of query  :
 
 2- write table name 
 
+![image](https://user-images.githubusercontent.com/64756218/146241497-e65cacbf-c114-4409-a696-b958220094e5.png)
+
+
 3- get table frm the DB 
 برجع كل التيبلز الموجودة بالداتا بيس 
 
+![image](https://user-images.githubusercontent.com/64756218/146241564-590ded49-225a-433d-ad78-f163d9eea828.png)
+
+
 4- RETURN ALL COLUMNS NAME IN THE TABLE YOU ENTERED
 
-5- 
+![image](https://user-images.githubusercontent.com/64756218/146241604-05964537-e6f0-44f2-9d50-c3f9db057353.png)
+
+
+
+5- ENTER THE TABLE NAME TO DROP IT 
+
+![image](https://user-images.githubusercontent.com/64756218/146241635-0034ebbf-f738-4fc2-9156-ce620837671c.png)
+
+
+
+
+### QUERY FACTORY 
+
+in factory design pattern 
+make GetInstance from this query 
+
+you enter the query type you need 
+
+in Query.js 
+
+![image](https://user-images.githubusercontent.com/64756218/146242400-f59e70ca-917f-4802-9fe7-28104c120050.png)
+
+
+if the query Ex. read 
+
+![image](https://user-images.githubusercontent.com/64756218/146242564-185eb214-ac2c-44eb-8ef7-5a1450c77666.png)
+
+create instanse from the read and return the instance etc........................
+
+FOR ALL TYPES THE CODE IN QUERYFACTORY : 
+
+![image](https://user-images.githubusercontent.com/64756218/146242829-12763132-0b39-468f-aa4a-5b8d76e2e922.png)
+
+
+
+
+
 
