@@ -1,6 +1,7 @@
 
 
 const ps = require('prompt-sync');
+const { collapseTextChangeRangesAcrossMultipleVersions } = require('typescript');
 
 //get some user input
 const enter = ps()
@@ -125,6 +126,22 @@ class Insert extends Query{
          }
      });
    }
+   InertConnectionDetails(values,dataBaseName,client){
+
+      var values_=values;
+
+      client.query("insert into connections (dbname) Select  '"+dataBaseName+"' Where not exists(select * from connections where dbname='"+dataBaseName+"')", function(error, result) {
+         if (error) {
+         console.log(error.stack)
+         } else {
+         
+            console.log("Inserted had done succsesfully : ") ;
+         
+         }
+     });
+   }
+
+  
 
    CreateTable(shcema,client){
 

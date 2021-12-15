@@ -7,22 +7,21 @@
  
   const prompt = ps()
 
-  let connectionDetails_ =  Connection.connectionDetails;
 
-  database = prompt("enter the name of DB : ");
+  let connection_ = new Connection.Connection()
+  let connectionDetails_ =  Connection.connectionDetails;
   connectionDetails_.hostName = prompt("enter the name of host : ");
   connectionDetails_.user = prompt("enter the name of user : ");
   connectionDetails_.passWord = prompt("enter the password : ");
   connectionDetails_.port = prompt("enter the port : ");
-
-  // Instantiate User:
-  let connection_ = new Connection.Connection()
   const localDB=connection_.GetNewConnection(connectionDetails_,"localDB");
- 
+  localDB.connect()
 
-  function autherizid(userId){
+
+
+  function autherizUser(userId,password){
     return new Promise( ( resolve, reject ) => {
-      localDB.query("SELECT user_id FROM users WHERE user_id = '"+ userId +"'", (err, result)=>{
+      localDB.query("SELECT user_id FROM users WHERE user_id = '"+ userId +"' and password = '" +password+"'", (err, result)=>{
             if (err){
                 return ( err );
             }
@@ -32,14 +31,7 @@
     })
   }
 
-  localDB.connect()
-  //connection_.ConnectionProfile(connectionDetails_,database,localDB)
-
-  const client=connection_.GetNewConnection(connectionDetails_,database);
-  client.connect();
-
-
-  function Implementation() {
+  function Implementation(client) {
 
         console.log("\n      List of Jobs :) ")
         console.log(" 1. make a query :) ")
@@ -167,26 +159,37 @@
  
 //main here 
 
-  async function main(){ 
+  async function Main(connectionDetails_){ 
     try{
-
+        console.log("Sign in :")
         usrId =prompt("enter your id  : ");
+        passWord =prompt("enter your password  : ");
+        const result =await autherizUser(usrId,passWord);
+        
 
-        const result =await autherizid(usrId);
+        if (result.length == 1){
 
-        if (result[0].user_id == 1){
-           console.log("welcome  ")
-           await Implementation()
+          console.log("welcome in your manegar database : ")
+          database = prompt("enter the name of DB : ");
+         
+          // Instantiate User
+          //yara here
+          
+          const client=connection_.GetNewConnection(connectionDetails_,database);
+          client.connect();
+        
+
+           await Implementation(client)
         }
-        else{
+        else if(result.length ==0){
           console.log("sign_up plz")
           return 0;
         }
 
     }
     catch(e){
-      //catch error
+      console.log("something is wrong")
     }
   }
 
-  main()
+  Main(connectionDetails_)

@@ -29,7 +29,6 @@
                         csvFile.ImportData(data,tableName,client);
                     }else{
                         let schema = csvFile.CreateSchema(data[0]);
-                        console.log(schema)
                         tableName =insert.CreateTable(schema,client);
                         data.shift() 
                         data.pop() 
@@ -77,7 +76,7 @@
                     }
             
                 }).catch(err => {
-                console.log(err);
+                    console.log(err);
                 })
 
             }
