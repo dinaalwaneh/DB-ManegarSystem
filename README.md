@@ -27,13 +27,16 @@ and connection class
 
 i need call the connection details object fron connection.js
 
+
 ![image](https://user-images.githubusercontent.com/64756218/146209453-1c299432-32f8-46dc-84c1-b95d3320e8bf.png)
+
 
 and this gonna be object 
 
 
 
 this to write and maje som input 
+
 ![image](https://user-images.githubusercontent.com/64756218/146213984-167d873a-ec82-4d70-8f2f-419c877c32ea.png)
 
 
