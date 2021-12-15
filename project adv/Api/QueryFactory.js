@@ -4,7 +4,7 @@ const Query = require("./Query")
 class QueryFactory {
 
         
-        CreateFile(queryType){
+        CreateQuery(queryType){
             let queryType_= Constants.QueryType;
             if(queryType==queryType_.READ){
                 const read = new Query.Read();

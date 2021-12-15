@@ -8,7 +8,7 @@ const QueryFactory = require("./QueryFactory")
 
         GetInstance(queryType){
             let queryFactory_= new QueryFactory();
-            let instance = queryFactory_.GetInstance(queryType)
+            let instance = queryFactory_.CreateQuery(queryType)
             return instance;
         }
 

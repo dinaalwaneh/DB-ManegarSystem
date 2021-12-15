@@ -19,21 +19,38 @@ class Query {
          }
       })
    }
+      
+   GetDBTabels(client){
+      return new Promise( ( resolve, reject ) => {
+          client.query("select table_name from information_schema.tables where table_schema='public'", (err, result)=>{
+              if (err){
+                  return reject( err );
+              }
+              {
+               
+                 resolve( result.rows);
+                   
+              }
+             
+          });
+      })
+    }
 
  
 }
 
 
+
  
- class Read extends Query {
+class Read extends Query {
 
       //Dina
-      GetTableData()
+      GetTableData(client)
       {
 
-         this.GetDBTabels();
+          
          var tableName = enter("enter table name : ")
-         Client.query("Select * from "+tableName, (error, result) => {
+         client.query("Select * from "+tableName, (error, result) => {
             if (error) {
                console.log(error.stack)
             } else {
@@ -43,29 +60,16 @@ class Query {
          })
       }
    
-   
-   
-      GetDBTabels(client){
-         return new Promise( ( resolve, reject ) => {
-             client.query("select table_name from information_schema.tables where table_schema='public'", (err, result)=>{
-                 if (err){
-                     return reject( err );
-                 }
-                 {
-                     resolve( result.rows);
-                      
-                 }
-                
-             });
-         })
-       }
+      async  print(y) {
+      console.log(y)
+   }
 
       GetDBColumns(result,client){
-    
+
          return new Promise( ( resolve, reject ) => {
-            client.query("SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = " + "'"+result.table_name+"'", (err, result)=> {
+            client.query("SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = " + "'"+result +"'", (err, result)=> {
              if (err) {
-                  console.log(err.stack)
+                  reject(err.stack)
              } else {
        
                   resolve(result.rows)
@@ -85,9 +89,16 @@ class Write extends Query {
 
 class Delete extends Query{
 
-   DeleteTable() {
-      //drop table table_name
+   DeleteTable(tableName,client) {
       
+      client.query("drop table "+tableName, (error, result) => {
+         if (error) {
+            console.log(error.stack)
+         } else {
+            console.log("table is deleted : ")
+            
+         }
+      })
    }
 
 

@@ -41,24 +41,26 @@ class File{
 
     }
 
-    async SchemaIsfounded(client,data){
+    async SchemaIsfounded(client,data,fileType){
         let result;
         let get=new query.Read();
         const dataBaseTables =await get.GetDBTabels(client);
-         
+        
         for(var i=0;i<dataBaseTables.length;i++){
 
-            const columnObject= await get.GetDBColumns(dataBaseTables[i],client);
+            const columnObject= await get.GetDBColumns(dataBaseTables[i].table_name,client);
             var columnArray = [];  
             for(var j=0;j<columnObject.length;j++){
                 columnArray.push(columnObject[j].column_name)   
             }
-
-           
+ 
             if(JSON.stringify(columnArray) === JSON.stringify(data))  {
                 result=dataBaseTables[i];
-                console.log("yeees")
-                return(result) ;
+          
+                 
+                    return(result.table_name) ;
+    
+                
                
               }
 
