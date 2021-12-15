@@ -99,7 +99,25 @@ class Connection {
 
 
 
-    //connectionprofile : yara
+    ConnectionProfile(connectionDetails_,databaseName,client){
+          
+        let listOfDetails=[connectionDetails_.host,connectionDetails_.user,connectionDetails_.port,databaseName,connectionDetails_.passWord]
+        
+        var values="("
+        for(var j=0;j<listOfDetails.length;j++){
+           if(j<listOfDetails.length-1){
+            values+="'"+listOfDetails[j]+"',"
+               
+          }
+          else{
+            values+="'"+listOfDetails[j]+"')"
+          }
+          
+        }
+            const insert = new query.Insert();
+            insert.InertConnectionDetails(values,databaseName,client)   
+    }
+
   }
  
 

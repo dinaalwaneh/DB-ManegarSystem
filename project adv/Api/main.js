@@ -173,7 +173,7 @@
           database = prompt("enter the name of DB : ");
          
           // Instantiate User
-          //yara here
+          connection_.ConnectionProfile(connectionDetails_,database,localDB)
           
           const client=connection_.GetNewConnection(connectionDetails_,database);
           client.connect();
