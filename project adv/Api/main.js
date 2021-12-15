@@ -9,11 +9,11 @@
 
   let connectionDetails_ =  Connection.connectionDetails;
 
-  database = "school";//prompt("enter the name of DB : ");
-  connectionDetails_.hostName = "localhost";//prompt("enter the name of host : ");
-  connectionDetails_.user ="postgres";// prompt("enter the name of user : ");
-  connectionDetails_.passWord ="dina14120021412002";// prompt("enter the password : ");
-  connectionDetails_.port = 5432; //prompt("enter the port : ");
+  database = prompt("enter the name of DB : ");
+  connectionDetails_.hostName = prompt("enter the name of host : ");
+  connectionDetails_.user = prompt("enter the name of user : ");
+  connectionDetails_.passWord = prompt("enter the password : ");
+  connectionDetails_.port = prompt("enter the port : ");
 
   // Instantiate User:
   let connection_ = new Connection.Connection()
