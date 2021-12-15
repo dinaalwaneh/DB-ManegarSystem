@@ -207,4 +207,22 @@ you must enter the type of file you want import to Database (CSV , JSON )
 
 
 
-
+![image](https://user-images.githubusercontent.com/64756218/146263651-d3832fef-9821-43ad-b42e-434e834a9c55.png)
+ 
+ 
+ csv file gonna create instace and call the function 
+ 
+ this function in factory pattern 
+ 
+ send CSV and the factory create the csv instance 
+ 
+ بقحص السكيما فاوندد 
+ فببعتتله الكلينت داتا بيس الي هي الداتا الهيدر 
+ 
+ 
+ if receve table name make shift for data 
+ 
+ 
+ the header is the firs row in the csv 
+ 
+ and pop it delete last row 
