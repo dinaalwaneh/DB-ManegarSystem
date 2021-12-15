@@ -170,6 +170,41 @@ FOR ALL TYPES THE CODE IN QUERYFACTORY :
 
 
 
+## QUERY CONTROLLER : 
+
+![image](https://user-images.githubusercontent.com/64756218/146251823-028eb97a-25e2-44d8-aa90-36984b67d951.png)
+
+
+HAS GETINSTANCE 
+نبعث له ال QUERY TYPE 
+and this connection with query factory , then make create query . 
+
+
+
+![image](https://user-images.githubusercontent.com/64756218/146252982-35045b5e-0b5b-459d-b890-799abe7863a6.png)
+
+
+the function get query  : in Query.js File 
+
+![image](https://user-images.githubusercontent.com/64756218/146253171-f3e6abe9-60f1-4894-8deb-6898c650ebb7.png)
+
+we put them in parint couse all querys type call this function and use it . 
+
+
+
+
+## case 2 in jobs from main.js 
+
+![image](https://user-images.githubusercontent.com/64756218/146258638-d9c2aeb4-5eb2-46d2-af98-8043d3671fef.png)
+
+
+![image](https://user-images.githubusercontent.com/64756218/146258736-ed2b051a-d17f-40b0-af40-41458cffdff1.png)
+
+
+you must enter the type of file you want import to Database (CSV , JSON ) 
+
+## FILE CONTROLLER :
+
 
 
 
