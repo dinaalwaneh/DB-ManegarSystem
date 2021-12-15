@@ -121,9 +121,13 @@ we enter the number of choice you need (1,2,3)
 
 the list of query  :
 1- اذا بدك تجيب داتا من تيبل لازم تكتب جملةال اس كيو ال كويري كاملة 
+
 2- write table name 
+
 3- get table frm the DB 
 برجع كل التيبلز الموجودة بالداتا بيس 
+
 4- RETURN ALL COLUMNS NAME IN THE TABLE YOU ENTERED
+
 5- 
 
