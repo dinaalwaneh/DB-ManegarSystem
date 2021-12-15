@@ -68,7 +68,11 @@ thisis for the same postgressql
 
 here making connection on database the user need to connection with it 
 by entar the data he need 
-///
+
+From the connection.js file   
+
+
+![image](https://user-images.githubusercontent.com/64756218/146220410-3837febf-0b55-40d2-b9e0-9f2031aeeea2.png)
 
 
 
@@ -80,4 +84,46 @@ by entar the data he need
 ### NOW Instantiate User:
 
 ![image](https://user-images.githubusercontent.com/64756218/146219786-2002c719-9559-4d63-a619-448d59fe0f0c.png)
+
+
+![image](https://user-images.githubusercontent.com/64756218/146234634-94be9ec7-0b85-46d7-8f05-df3766fc7f06.png)
+
+get new connection for the database have the localhost = ex.localhost and postgres and pass. ...........
+
+
+
+connection for the client 
+ببعتله الداتا بيس المتغيرة 
+
+فوق ثابتة لانها ل 
+lcal DB FOR ALL PROGRAM
+
+![image](https://user-images.githubusercontent.com/64756218/146235574-4d2225cd-2d65-4053-bfd1-cca49e08c53e.png)
+
+
+
+
+NOoe function implemintation for the main in main.js 
+
+![image](https://user-images.githubusercontent.com/64756218/146236126-46d24fa9-4e35-48a3-9ae1-194219cb0fb0.png)
+
+
+list 
+
+![image](https://user-images.githubusercontent.com/64756218/146236232-af415678-a3e9-4f95-8223-169a6a54a060.png)
+
+we enter the number of choice you need (1,2,3) 
+
+
+### case 1 : 
+
+![image](https://user-images.githubusercontent.com/64756218/146236509-db49710f-f5cc-4fae-9bb8-69577c7d53d1.png)
+
+the list of query  :
+1- اذا بدك تجيب داتا من تيبل لازم تكتب جملةال اس كيو ال كويري كاملة 
+2- write table name 
+3- get table frm the DB 
+برجع كل التيبلز الموجودة بالداتا بيس 
+4- RETURN ALL COLUMNS NAME IN THE TABLE YOU ENTERED
+5- 
 
