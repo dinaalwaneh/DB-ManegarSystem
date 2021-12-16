@@ -28,8 +28,4 @@ class FileFactory {
 }
 module.exports = FileFactory
  
-
-/*
-let f =new FileFactory()
-o = f.CreateFile("Csv")
-o.ReadFile("C:\\Users\\hp\\Desktop\\all\\data.csv")*/
+ 
