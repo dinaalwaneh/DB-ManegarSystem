@@ -64,7 +64,7 @@
                             queryinstance.GetQuery(client);
                           }
                           catch(e){
-                            //catch error
+                            throw new Error('error in query') 
                           }
                         }
                         GetQueryBefoerAother();
@@ -79,7 +79,7 @@
                               queryinstance.GetTableData(client);
                             }
                             catch(e){
-                              //catch error
+                              throw new Error('error in add table ') 
                             }
                           }
                           GetQueryBefoerAother();
@@ -93,7 +93,7 @@
                               console.log(result)
                             }
                             catch(e){
-                              //catch error
+                              throw new Error('the table is not found') 
                             }
                           }
                           GetQueryBefoerAother();
@@ -110,7 +110,8 @@
                                 console.log(columnsResult)
                               }
                               catch(e){
-                                //catch error
+                                throw new Error('the column is not found') 
+
                               }
                             }
                             GetQueryBefoerAother();
@@ -128,7 +129,8 @@
                               
                               }
                               catch(e){
-                                //catch error
+                                throw new Error('the table is not found') 
+
                               }
                             }
                             GetQueryBefoerAother();
@@ -160,6 +162,10 @@
 //main here 
 
   async function Main(connectionDetails_){ 
+    const log4js = require('log4js');
+
+    // Create the logger
+    const logger = log4js.getLogger();
     try{
         console.log("Sign in :")
         usrId =prompt("enter your id  : ");
@@ -168,7 +174,8 @@
         
 
         if (result.length == 1){
-
+          logger.level = 'info';
+          logger.info('Successfully!');
           console.log("welcome in your manegar database : ")
           database = prompt("enter the name of DB : ");
          
@@ -182,13 +189,19 @@
            await Implementation(client)
         }
         else if(result.length ==0){
+          logger.level = 'error';
+          logger.error('The id is not available...');
           console.log("sign_up plz")
           return 0;
         }
 
     }
     catch(e){
-      console.log("something is wrong")
+      logger.level = 'error';
+      logger.error('The id is not available...');
+      console.log("Authentication failed, try again..")
+    
+      Implementation(client);
     }
   }
 

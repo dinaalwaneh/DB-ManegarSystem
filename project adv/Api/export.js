@@ -1,6 +1,12 @@
 const Pool = require("pg").Pool;
  const createCsvWriter = require("csv-writer").createObjectCsvWriter;
  
+
+ const log4js = require('log4js');
+// Create the logger
+const logger = log4js.getLogger(); 
+
+
  // Create  connection to the database
  const pool = new Pool({
    host: "localhost",
@@ -11,11 +17,15 @@ const Pool = require("pg").Pool;
  });
  // open  PostgreSQL connection
  pool.connect((err, client, done) => {
+  logger.level = 'Error';
+  logger.Error('connection failed');
    if (err) throw err;
  
    client.query("SELECT * FROM customers", (err, result) => {
      done();
      if (err) {
+      logger.level = 'error';
+      logger.error('query syntext error');
        console.log(err.stack);
      } else {
        const jsonData = JSON.parse(JSON.stringify(result.rows));
@@ -32,7 +42,9 @@ const Pool = require("pg").Pool;
        });
        csvWriter
          .writeRecords(jsonData)
-         .then(() =>
+         .then( () =>
+         logger.level = 'info',
+         logger.info('Successfully!'),
            console.log("csvWriter.csv successfully!")
          );
      }

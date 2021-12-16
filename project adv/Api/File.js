@@ -3,14 +3,22 @@ const fileSystem = require("fs");
 const query=require('./Query.js');
 
 
+const log4js = require('log4js');
+// Create the logger
+const logger = log4js.getLogger();
+
 class File{
 
 
     constructor(){
+        logger.level = 'info';
+        logger.info('Instance Success!');
         console.log("Instance has done sucssfully :")
     }
     
     ReadFile(path){
+        logger.level = 'info';
+        logger.info('Reading Success!');
         console.log("Reading file has done sucssfult : ");
     }
 
@@ -26,6 +34,8 @@ class File{
           }
           
         }
+        logger.level = 'info';
+        logger.info('return the values');
         return values;
     }
 
@@ -57,7 +67,8 @@ class File{
             if(JSON.stringify(columnArray) === JSON.stringify(data))  {
                 result=dataBaseTables[i];
           
-                 
+                logger.level = 'info';
+                logger.info('schema has found');
                     return(result.table_name) ;
     
                 
@@ -78,6 +89,8 @@ class File{
                 schema+=jsonHeader[i]+" varchar(255))"
         }
         } 
+        logger.level = 'info';
+        logger.info('create schema');
         return schema;
 
     }  
@@ -111,7 +124,8 @@ class Csv extends File{
         for (let i in data) { // SPLIT COLUMNS
              data[i] = data[i].split(",");
         }
- 
+        logger.level = 'info';
+        logger.info('return the csv file');
         return data;
     }
 
@@ -127,6 +141,8 @@ class Json extends File{
         //path = > "User.json" 
         var rawdata = fileSystem.readFileSync(path , "utf8");
         let data = JSON.parse(rawdata);
+        logger.level = 'info';
+        logger.info('return the json file');
         return data;
     }
  

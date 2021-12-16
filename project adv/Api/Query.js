@@ -6,7 +6,9 @@ const { collapseTextChangeRangesAcrossMultipleVersions } = require('typescript')
 //get some user input
 const enter = ps()
 
- 
+const log4js = require('log4js');
+// Create the logger
+const logger = log4js.getLogger();
 class Query {
   
    GetQuery(client){
@@ -14,8 +16,12 @@ class Query {
       let query=enter("enter your query plz : ")
       client.query(query, (error, result) => {
          if (error) {
+            ogger.level = 'error';
+            logger.error('syntext query error');
             console.log(error.stack)
          } else {
+            logger.level = 'info';
+            logger.info('show the rows');
              console.log(result.rows)
          }
       })
@@ -25,6 +31,8 @@ class Query {
       return new Promise( ( resolve, reject ) => {
           client.query("select table_name from information_schema.tables where table_schema='public'", (err, result)=>{
               if (err){
+               logger.level = 'error';
+               logger.error('the table is not found');
                   return reject( err );
               }
               {
@@ -53,6 +61,8 @@ class Read extends Query {
          var tableName = enter("enter table name : ")
          client.query("Select * from "+tableName, (error, result) => {
             if (error) {
+               logger.level = 'error';
+               logger.error('the data is not found');
                console.log(error.stack)
             } else {
                console.log(result.rows)
