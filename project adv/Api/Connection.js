@@ -8,16 +8,31 @@ var connectionDetails= {
      
 }
     
-  
+const log4js = require('log4js');
+// Create the logger
+const logger = log4js.getLogger(); 
+log4js.configure({
+    appenders: {
+        fileAppender: { type: 'file', filename: './logs/example-12.log' },
+        console: { type: 'console' }
+    },
+    categories: {
+        default: { appenders: ['fileAppender'], level: 'error' }
+    }
+}); 
+
 class Connection {
     database=""
     constructor() {
         if (Connection.instance) {
+            logger.level = 'info';
+            logger.info('Created !');
           console.log("Instence is already created : ")
           return Connection.instance
         }
         Connection.instance = this;
-        
+        logger.level = 'info';
+        logger.info('Successfully!');
         console.log("Create instence is done succssfuly : ")
      }
 
@@ -51,18 +66,26 @@ class Connection {
     }
 
     GetHost(){
+        logger.level = 'info';
+        logger.info('return the host');
         return connectionDetails.host;
     }
     
     GetUser(){
+        logger.level = 'info';
+        logger.info('return the user');
         return connectionDetails.user;
     }
 
     GetPort(){
+        logger.level = 'info';
+        logger.info('return the port');
         return connectionDetails.port;
     }
 
     GetPassword(){
+        logger.level = 'info';
+        logger.info('return the password');
         return connectionDetails.passWord;
     }
     
@@ -82,7 +105,8 @@ class Connection {
             database: this.GetDataBase()
 
         });
-        
+        logger.level = 'info';
+        logger.info('return the database');
         return cleint;
 
     }
@@ -91,7 +115,8 @@ class Connection {
           
         this.SetConnection(connectionDetails_,databaseName);
         const cleint = this.GetClient();
- 
+        logger.level = 'info';
+        logger.info('return the new database');
        return cleint;
 
 
