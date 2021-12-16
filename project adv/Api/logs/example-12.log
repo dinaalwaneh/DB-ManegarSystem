@@ -5,3 +5,21 @@
 [2021-12-16T02:11:40.409] [INFO] default - return the password
 [2021-12-16T02:11:40.409] [INFO] default - return the database
 [2021-12-16T02:11:40.409] [INFO] default - return the new database
+[2021-12-16T23:25:59.437] [INFO] default - Successfully!
+[2021-12-16T23:26:18.306] [INFO] default - return the host
+[2021-12-16T23:26:18.307] [INFO] default - return the user
+[2021-12-16T23:26:18.307] [INFO] default - return the port
+[2021-12-16T23:26:18.307] [INFO] default - return the password
+[2021-12-16T23:26:18.309] [INFO] default - return the database
+[2021-12-16T23:26:18.309] [INFO] default - return the new database
+[2021-12-16T23:26:24.326] [INFO] default - Successfully!
+[2021-12-16T23:26:28.125] [INFO] default - return the host
+[2021-12-16T23:26:28.126] [INFO] default - return the user
+[2021-12-16T23:26:28.126] [INFO] default - return the port
+[2021-12-16T23:26:28.126] [INFO] default - return the password
+[2021-12-16T23:26:28.126] [INFO] default - return the database
+[2021-12-16T23:26:28.127] [INFO] default - return the new database
+[2021-12-16T23:30:03.231] [DEBUG] default - query  controller enter!
+[2021-12-16T23:30:03.231] [INFO] default - query viewed
+[2021-12-16T23:30:03.231] [INFO] default - query return
+[2021-12-16T23:30:16.885] [INFO] default - show the rows
